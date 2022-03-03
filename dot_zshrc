@@ -1,0 +1,87 @@
+# Path to oh-my-zsh installation.
+export ZSH="/Users/sondrelg/.oh-my-zsh"
+
+# Completion settings
+CASE_SENSITIVE="false"
+HYPHEN_INSENSITIVE="true"
+
+# Update settings
+DISABLE_UPDATE_PROMPT="true"
+export UPDATE_ZSH_DAYS=7
+
+plugins=(
+	git
+	brew 
+  heroku
+	postgres 
+	zsh-autosuggestions 
+	zsh-syntax-highlighting
+	kubectl
+)
+
+# Don't higlight when pasting something to the terminal
+# https://github.com/zsh-users/zsh/blob/ac0dcc9a63dc2a0edc62f8f1381b15b0b5ce5da3/NEWS#L37-L42
+zle_highlight+=(paste:none)
+
+# Active plugins
+source $ZSH/oh-my-zsh.sh
+
+# Aliases
+alias zsh="subl ~/.zshrc"
+alias run="manage.py runserver 8000"
+alias fggp="git push origin HEAD -f"
+alias reload="source ~/.zshrc"
+alias manage.py="DD_TRACE_ENABLED=false UNLEASH_ENABLED=false python manage.py"
+alias migrate="python manage.py migrate"
+alias mm="python manage.py makemigrations"
+alias cc="python manage.py collectstatic"
+alias cb="git branch --merged | grep -v \* | xargs git branch -D"
+alias dc="docker compose"
+alias lol="log --all --oneline --graph --all"
+alias predis="redis-cli -u `heroku config:get REDISCLOUD_URL -a otovopayments`"
+alias cat='bat --paging=never'
+alias pca="SKIP="djlint-jinja" pre-commit run --all-files"
+alias pc="pre-commit"
+
+# Typo aliases
+alias igt="git"
+alias gti="git"
+alias pyton="python"
+alias instal="install"
+alias isntal="install"
+alias realod="reload"
+alias instal="install"
+alias flake="flake8"
+alias instal="install"
+alias isntall="install"
+
+# Aliases I need to stop using
+alias fpush="echo '\nUse fggp'"
+alias push="echo '\nUse ggp'"
+alias gpo="echo '\nUse gpr origin <branch>'"
+
+# Pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+
+# Virtualenvwrapper
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Documents
+export VIRTUALENVWRAPPER_SCRIPT=/usr/local/bin/virtualenvwrapper.sh
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3.9
+source /usr/local/bin/virtualenvwrapper_lazy.sh
+
+# FNM
+export PATH=/Users/sondrelg/.fnm:$PATH
+eval "`fnm env`"
+
+ #OpenSSL
+export PATH="/usr/local/opt/openssl/bin:$PATH"
+
+# Starship
+eval "$(starship init zsh)"
+
+export PATH="/Users/sondrelg/.local/bin:$PATH"

@@ -1,0 +1,12 @@
+\set QUIET
+\pset pager always
+\unset QUIET
+
+-- Use unicode for borders
+\pset linestyle unicode
+
+-- Show nulls as (null) to differentiate them from empty strings
+\pset null '(null)'
+
+-- Rotate table when it doesn't fit sideways
+\x auto
